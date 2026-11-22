@@ -22,6 +22,8 @@ if (video && filmControl) {
 
 const frame = document.querySelector('#weorder');
 const direct = document.querySelector('#order-direct');
+const orderShell = document.querySelector('#order-shell');
+const orderViewControl = document.querySelector('#order-view-control');
 const sound = document.querySelector('#sound-control');
 const mascot = document.querySelector('.mascot');
 const audio = new Audio('assets/order-chime.wav');
@@ -40,6 +42,18 @@ try {
 } catch {
   // Keep the verified source-site address when configuration is invalid.
 }
+
+orderViewControl.hidden = false;
+orderViewControl.addEventListener('click', () => {
+  const compact = orderShell.classList.toggle('is-compact');
+  orderViewControl.textContent = compact ? 'Vis hele menyen' : 'Kompakt bestilling';
+  if (compact) {
+    orderShell.scrollIntoView({
+      block: 'start',
+      behavior: reducedMotion.matches ? 'instant' : 'smooth'
+    });
+  }
+});
 
 function playChime() {
   audio.currentTime = 0;

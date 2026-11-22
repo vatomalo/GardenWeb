@@ -56,13 +56,17 @@
           <div class="order-toolbar">
             <span class="weorder-label">WeOrder</span>
             <div class="order-actions">
+              <button type="button" class="text-button" id="order-view-control"
+                      aria-controls="weorder" hidden>Kompakt bestilling</button>
               <button type="button" class="text-button" id="sound-control" aria-pressed="false" hidden>Lyd av</button>
               <a id="order-direct" class="direct" href="https://order.weorder.com/app/garden">Åpne WeOrder</a>
             </div>
           </div>
-          <iframe id="weorder" title="Live bestilling fra Garden Restaurant via WeOrder"
-                  src="https://order.weorder.com/app/garden" loading="lazy"
-                  referrerpolicy="strict-origin-when-cross-origin" allow="payment"></iframe>
+          <div class="order-viewport">
+            <iframe id="weorder" title="Live bestilling fra Garden Restaurant via WeOrder"
+                    src="https://order.weorder.com/app/garden" loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin" allow="payment"></iframe>
+          </div>
         </div>
       </div>
     </section>

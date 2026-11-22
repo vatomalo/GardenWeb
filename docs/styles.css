@@ -295,6 +295,7 @@ h1 em {
 }
 
 .order-shell {
+  --weorder-full-height: 17800px;
   border: 1px solid #f4dcaa53;
   background: #fff9ec;
   color: #321b18;
@@ -303,12 +304,16 @@ h1 em {
 
 .order-toolbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: .75rem;
   align-items: center;
   padding: .75rem clamp(.65rem,2.3vw,1.5rem);
   border-bottom: 1px solid #d9cdbb;
   background: #fff4df;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .weorder-label {
@@ -318,6 +323,7 @@ h1 em {
 
 .order-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: clamp(.6rem,2vw,1.3rem);
   align-items: center;
 }
@@ -339,13 +345,37 @@ h1 em {
   outline-color: #6e332a;
 }
 
+.order-viewport {
+  overflow: hidden;
+}
+
 .order-shell iframe {
   width: 100%;
-  height: clamp(550px,77vh,900px);
+  height: var(--weorder-full-height);
+  /* WeOrder's cover uses 30% of its frame height. Keep its last 300px,
+     including the restaurant card, when the frame fits the entire menu. */
+  margin-top: calc(300px - var(--weorder-full-height) * .3);
   display: block;
   border: 0;
   background: #fff;
   color-scheme: light;
+}
+
+@media (min-width: 820px) {
+  .order-shell {
+    --weorder-full-height: 21000px;
+  }
+}
+
+@media (min-width: 1320px) {
+  .order-shell {
+    --weorder-full-height: 23400px;
+  }
+}
+
+.order-shell.is-compact iframe {
+  height: clamp(500px, 76vh, 900px);
+  margin-top: 0;
 }
 
 .kitchen {
@@ -454,10 +484,6 @@ h1 em {
   }
   .order-heading {
     align-items: center;
-  }
-  .order-shell iframe {
-    height: 74vh;
-    min-height: 560px;
   }
 }
 
