@@ -259,7 +259,6 @@ h1 em {
 
 .order-shell {
   --weorder-full-height: 17800px;
-  overflow-anchor: none;
   border-block: 1px solid #f4dcaa53;
   background: #fff9ec;
   color: #321b18;
@@ -275,7 +274,9 @@ h1 em {
   padding: .75rem clamp(.65rem,2.3vw,1.5rem);
   border-bottom: 1px solid #d9cdbb;
   background: #fff4df;
-  /* In normal flow so the toolbar does not cover the full menu. */
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .order-hint {
@@ -297,17 +298,16 @@ h1 em {
 }
 
 .text-button {
-  border: 1px solid #672b25;
-  background: #672b25;
-  color: #fff4df;
+  border: 1px solid #ab776b;
+  background: none;
   cursor: pointer;
-  padding: .48rem .85rem;
-  min-height: 42px;
-  border-radius: 4px;
+  padding: .25rem .62rem;
 }
 
-.text-button:hover {
-  background: #854237;
+.order-view-button {
+  background: #672b25;
+  border-color: #672b25;
+  color: #fff4df;
 }
 
 .text-button:focus-visible,.direct:focus-visible {
@@ -315,28 +315,17 @@ h1 em {
 }
 
 .order-viewport {
-  overflow: clip;
-  overflow-anchor: none;
+  overflow: hidden;
 }
 
 .order-shell iframe {
   width: 100%;
-  height: var(--weorder-full-height);
-  /* Full menu: the cover scales with frame height. Crop it to reach the dishes.
-     Authentication is available in .is-login-mode with no cropping. */
-  margin-top: calc(300px - var(--weorder-full-height) * .3);
+  height: clamp(500px, 76vh, 900px);
+  height: min(clamp(500px, 76svh, 900px), calc(100svh - 112px));
   display: block;
   border: 0;
   background: #fff;
   color-scheme: light;
-  overflow-anchor: none;
-}
-
-/* The same iframe switches to a normal-size, uncropped login/checkout view.
-   No reload means the WeOrder session is kept while switching views. */
-.order-shell.is-login-mode iframe {
-  height: clamp(620px, 88svh, 960px);
-  margin-top: 0;
 }
 
 @media (min-width: 820px) {
@@ -349,6 +338,13 @@ h1 em {
   .order-shell {
     --weorder-full-height: 23400px;
   }
+}
+
+.order-shell.is-full-menu iframe {
+  height: var(--weorder-full-height);
+  /* WeOrder's cover uses 30% of its frame height. Keep its last 300px,
+     including the restaurant card, when the frame fits the entire menu. */
+  margin-top: calc(300px - var(--weorder-full-height) * .3);
 }
 
 .kitchen {

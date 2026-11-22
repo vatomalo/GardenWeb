@@ -6,9 +6,9 @@
   <meta name="description" content="Kantonesiske og sichuanske smaker på Garden Restaurant i Kongsberg. Bestill takeaway eller reserver bord.">
   <meta name="theme-color" content="#201310">
   <title>Garden Restaurant · Kongsberg</title>
-  <link rel="stylesheet" href="styles.css?v=login-restore-20261122">
+  <link rel="stylesheet" href="styles.css?v=restore-order-20261122">
   <script src="weorder-config.js?v=restaurant-only" defer></script>
-  <script src="app.js?v=login-restore-20261122" defer></script>
+  <script src="app.js?v=restore-order-20261122" defer></script>
 </head>
 <body>
   <a class="skip" href="#bestill">Hopp til bestilling</a>
@@ -54,16 +54,16 @@
     <section id="bestill" aria-label="Bestill takeaway">
       <div class="order-shell" id="order-shell">
         <div class="order-toolbar">
-          <p class="order-hint" id="order-hint">Hele menyen er tilgjengelig nedenfor. Bruk knappen for å logge inn eller velge takeaway.</p>
+          <p class="order-hint" id="order-hint">Login eller velg takeaway først</p>
           <div class="order-actions">
             <button type="button" class="text-button order-view-button" id="order-view-control"
-                    aria-controls="weorder" aria-pressed="false">Logg inn / velg takeaway</button>
+                    aria-controls="weorder" aria-describedby="order-hint" hidden>Vis hele menyen</button>
             <a id="order-direct" class="direct" href="https://order.weorder.com/app/garden">Åpne WeOrder</a>
           </div>
         </div>
         <div class="order-viewport">
           <iframe id="weorder" title="Live bestilling fra Garden Restaurant via WeOrder"
-                  src="https://order.weorder.com/app/garden" loading="eager"
+                  src="https://order.weorder.com/app/garden" loading="lazy"
                   referrerpolicy="strict-origin-when-cross-origin" allow="payment"></iframe>
         </div>
       </div>
