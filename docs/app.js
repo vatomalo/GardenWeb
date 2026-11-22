@@ -25,7 +25,6 @@ const direct = document.querySelector('#order-direct');
 const orderShell = document.querySelector('#order-shell');
 const orderViewControl = document.querySelector('#order-view-control');
 const sound = document.querySelector('#sound-control');
-const mascot = document.querySelector('.mascot');
 const audio = new Audio('assets/order-chime.wav');
 const completed = new Set();
 let soundEnabled = false;
@@ -63,8 +62,6 @@ document.querySelectorAll('a[href="#bestill"]').forEach(link => {
 function playChime() {
   audio.currentTime = 0;
   audio.play().catch(() => {});
-  mascot.classList.remove('celebrate');
-  requestAnimationFrame(() => mascot.classList.add('celebrate'));
 }
 sound.hidden = false;
 sound.addEventListener('click', () => {

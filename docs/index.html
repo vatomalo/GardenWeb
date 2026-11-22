@@ -6,9 +6,9 @@
   <meta name="description" content="Kantonesiske og sichuanske smaker på Garden Restaurant i Kongsberg. Bestill takeaway eller reserver bord.">
   <meta name="theme-color" content="#201310">
   <title>Garden Restaurant · Kongsberg</title>
-  <link rel="stylesheet" href="styles.css?v=checkout-view">
+  <link rel="stylesheet" href="styles.css?v=kitchen-first">
   <script src="weorder-config.js" defer></script>
-  <script src="app.js?v=checkout-view" defer></script>
+  <script src="app.js?v=kitchen-first" defer></script>
 </head>
 <body>
   <a class="skip" href="#bestill">Hopp til bestilling</a>
@@ -40,37 +40,6 @@
       <span class="hero-location">Storgata 2 · Kongsberg</span>
     </section>
 
-    <section class="ordering" id="bestill" aria-labelledby="order-title">
-      <div class="container">
-        <div class="order-heading">
-          <div>
-            <p class="eyebrow"><span></span> Takeaway</p>
-            <h2 id="order-title">Bestill fra Garden</h2>
-          </div>
-          <div class="mascots" aria-hidden="true">
-            <img class="mascot" src="assets/dumpling.png" width="80" height="80" alt="">
-            <img class="mascot chili" src="assets/chili.png" width="80" height="80" alt="">
-          </div>
-        </div>
-        <div class="order-shell" id="order-shell">
-          <div class="order-toolbar">
-            <span class="weorder-label">WeOrder</span>
-            <div class="order-actions">
-              <button type="button" class="text-button" id="order-view-control"
-                      aria-controls="weorder" hidden>Vis hele menyen</button>
-              <button type="button" class="text-button" id="sound-control" aria-pressed="false" hidden>Lyd av</button>
-              <a id="order-direct" class="direct" href="https://order.weorder.com/app/garden">Åpne WeOrder</a>
-            </div>
-          </div>
-          <div class="order-viewport">
-            <iframe id="weorder" title="Live bestilling fra Garden Restaurant via WeOrder"
-                    src="https://order.weorder.com/app/garden" loading="lazy"
-                    referrerpolicy="strict-origin-when-cross-origin" allow="payment"></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="kitchen" id="kjokken" aria-labelledby="kitchen-title">
       <div class="container kitchen-grid">
         <img src="assets/hang-bing-fei.jpg" alt="Kokk ved en flammende wok" width="900" height="600" loading="lazy">
@@ -79,6 +48,25 @@
           <h2 id="kitchen-title">Fra woken til bordet.</h2>
           <p>På Garden møtes det kantonesiske kjøkkenet og smakene fra Sichuan. Kom innom for dim sum, varme gryter og en kveld rundt bordet.</p>
           <a class="button outline" href="#besok">Planlegg et besøk</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="bestill" aria-label="Bestill takeaway">
+      <div class="order-shell" id="order-shell">
+        <div class="order-toolbar">
+          <span class="weorder-label">WeOrder</span>
+          <div class="order-actions">
+            <button type="button" class="text-button" id="order-view-control"
+                    aria-controls="weorder" hidden>Vis hele menyen</button>
+            <button type="button" class="text-button" id="sound-control" aria-pressed="false" hidden>Lyd av</button>
+            <a id="order-direct" class="direct" href="https://order.weorder.com/app/garden">Åpne WeOrder</a>
+          </div>
+        </div>
+        <div class="order-viewport">
+          <iframe id="weorder" title="Live bestilling fra Garden Restaurant via WeOrder"
+                  src="https://order.weorder.com/app/garden" loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin" allow="payment"></iframe>
         </div>
       </div>
     </section>
