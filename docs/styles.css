@@ -290,13 +290,27 @@ h1 em {
   align-items: center;
 }
 
-.direct {
+.text-button,.direct {
   color: #672b25;
   font-size: .9rem;
   font-weight: 650;
 }
 
-.direct:focus-visible {
+.text-button {
+  border: 1px solid #672b25;
+  background: #672b25;
+  color: #fff4df;
+  cursor: pointer;
+  padding: .48rem .85rem;
+  min-height: 42px;
+  border-radius: 4px;
+}
+
+.text-button:hover {
+  background: #854237;
+}
+
+.text-button:focus-visible,.direct:focus-visible {
   outline-color: #6e332a;
 }
 
@@ -308,13 +322,21 @@ h1 em {
 .order-shell iframe {
   width: 100%;
   height: var(--weorder-full-height);
-  /* The WeOrder cover scales with iframe height. Keep the restaurant card in view. */
+  /* Full menu: the cover scales with frame height. Crop it to reach the dishes.
+     Authentication is available in .is-login-mode with no cropping. */
   margin-top: calc(300px - var(--weorder-full-height) * .3);
   display: block;
   border: 0;
   background: #fff;
   color-scheme: light;
   overflow-anchor: none;
+}
+
+/* The same iframe switches to a normal-size, uncropped login/checkout view.
+   No reload means the WeOrder session is kept while switching views. */
+.order-shell.is-login-mode iframe {
+  height: clamp(620px, 88svh, 960px);
+  margin-top: 0;
 }
 
 @media (min-width: 820px) {

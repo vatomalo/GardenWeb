@@ -33,3 +33,17 @@ try {
 } catch {
   // Keep the verified source-site address when configuration is invalid.
 }
+
+const orderShell = document.querySelector('#order-shell');
+const orderViewControl = document.querySelector('#order-view-control');
+const orderHint = document.querySelector('#order-hint');
+
+orderViewControl.addEventListener('click', () => {
+  const loginMode = orderShell.classList.toggle('is-login-mode');
+  orderViewControl.setAttribute('aria-pressed', String(loginMode));
+  orderViewControl.textContent = loginMode ? 'Vis hele menyen' : 'Logg inn / velg takeaway';
+  orderHint.textContent = loginMode
+    ? 'Logg inn, velg takeaway eller fullfør bestillingen her. Gå tilbake til hele menyen når du er klar.'
+    : 'Hele menyen er tilgjengelig nedenfor. Bruk knappen for å logge inn eller velge takeaway.';
+  // Never scroll or reload the cross-origin iframe automatically.
+});
