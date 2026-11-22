@@ -7,8 +7,8 @@
   <meta name="theme-color" content="#201310">
   <title>Garden Restaurant · Kongsberg</title>
   <link rel="stylesheet" href="styles.css?v=takeaway-guide">
-  <script src="weorder-config.js" defer></script>
-  <script src="app.js?v=takeaway-guide" defer></script>
+  <script src="weorder-config.js?v=restaurant-only" defer></script>
+  <script src="app.js?v=restaurant-only" defer></script>
 </head>
 <body>
   <a class="skip" href="#bestill">Hopp til bestilling</a>
@@ -31,7 +31,6 @@
       </div>
       <div class="hero-wash"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span></span> IRL Garden Gaiden</p>
         <h1 id="hero-title">I kveld på<br><em>Garden.</em></h1>
         <p class="hero-description">Kantonesiske og sichuanske smaker.<br>Midt i Kongsberg.</p>
         <a class="button gold" href="#bestill">Bestill takeaway</a>
@@ -55,11 +54,10 @@
     <section id="bestill" aria-label="Bestill takeaway">
       <div class="order-shell" id="order-shell">
         <div class="order-toolbar">
-          <p class="order-hint" id="order-hint">Velg Takeaway i WeOrder først.</p>
+          <p class="order-hint" id="order-hint">Login eller velg takeaway først</p>
           <div class="order-actions">
             <button type="button" class="text-button order-view-button" id="order-view-control"
                     aria-controls="weorder" aria-describedby="order-hint" hidden>Vis hele menyen</button>
-            <button type="button" class="text-button" id="sound-control" aria-pressed="false" hidden>Lyd av</button>
             <a id="order-direct" class="direct" href="https://order.weorder.com/app/garden">Åpne WeOrder</a>
           </div>
         </div>

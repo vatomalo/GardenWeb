@@ -26,11 +26,6 @@ const orderShell = document.querySelector('#order-shell');
 const orderViewControl = document.querySelector('#order-view-control');
 const orderHint = document.querySelector('#order-hint');
 const takeawayHint = orderHint.textContent;
-const sound = document.querySelector('#sound-control');
-const audio = new Audio('assets/order-chime.wav');
-const completed = new Set();
-let soundEnabled = false;
-let storefrontOrigin = null;
 
 try {
   const storefront = new URL(config.storefrontUrl);
@@ -39,7 +34,6 @@ try {
   }
   if (frame.src !== storefront.href) frame.src = storefront.href;
   direct.href = storefront.href;
-  storefrontOrigin = storefront.origin;
 } catch {
   // Keep the verified source-site address when configuration is invalid.
 }
@@ -60,26 +54,4 @@ orderViewControl.addEventListener('click', () => {
 });
 document.querySelectorAll('a[href="#bestill"]').forEach(link => {
   link.addEventListener('click', () => setFullMenu(false));
-});
-
-function playChime() {
-  audio.currentTime = 0;
-  audio.play().catch(() => {});
-}
-sound.hidden = false;
-sound.addEventListener('click', () => {
-  soundEnabled = !soundEnabled;
-  sound.setAttribute('aria-pressed', String(soundEnabled));
-  sound.textContent = soundEnabled ? 'Lyd på' : 'Lyd av';
-  if (soundEnabled) playChime();
-});
-window.addEventListener('message', event => {
-  const type = config?.completionType;
-  const payload = event.data;
-  if (!type || storefrontOrigin !== event.origin || event.source !== frame.contentWindow ||
-      !payload || typeof payload !== 'object' || payload.type !== type ||
-      typeof payload.orderId !== 'string' || !payload.orderId.trim() ||
-      payload.orderId.length > 128 || completed.has(payload.orderId)) return;
-  completed.add(payload.orderId);
-  if (soundEnabled) playChime();
 });
