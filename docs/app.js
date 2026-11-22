@@ -24,6 +24,8 @@ const frame = document.querySelector('#weorder');
 const direct = document.querySelector('#order-direct');
 const orderShell = document.querySelector('#order-shell');
 const orderViewControl = document.querySelector('#order-view-control');
+const orderHint = document.querySelector('#order-hint');
+const takeawayHint = orderHint.textContent;
 const sound = document.querySelector('#sound-control');
 const audio = new Audio('assets/order-chime.wav');
 const completed = new Set();
@@ -45,6 +47,7 @@ try {
 function setFullMenu(showFullMenu) {
   orderShell.classList.toggle('is-full-menu', showFullMenu);
   orderViewControl.textContent = showFullMenu ? 'Tilbake til bestilling' : 'Vis hele menyen';
+  orderHint.textContent = showFullMenu ? 'Gå tilbake til bestilling for å bruke kassen.' : takeawayHint;
 }
 
 orderViewControl.hidden = false;

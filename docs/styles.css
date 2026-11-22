@@ -278,9 +278,9 @@ h1 em {
   z-index: 2;
 }
 
-.weorder-label {
-  font-weight: 800;
-  letter-spacing: .02em;
+.order-hint {
+  font-size: .9rem;
+  font-weight: 650;
 }
 
 .order-actions {
@@ -303,6 +303,12 @@ h1 em {
   padding: .25rem .62rem;
 }
 
+.order-view-button {
+  background: #672b25;
+  border-color: #672b25;
+  color: #fff4df;
+}
+
 .text-button:focus-visible,.direct:focus-visible {
   outline-color: #6e332a;
 }
@@ -314,7 +320,7 @@ h1 em {
 .order-shell iframe {
   width: 100%;
   height: clamp(500px, 76vh, 900px);
-  height: min(clamp(500px, 76svh, 900px), calc(100svh - 96px));
+  height: min(clamp(500px, 76svh, 900px), calc(100svh - 112px));
   display: block;
   border: 0;
   background: #fff;

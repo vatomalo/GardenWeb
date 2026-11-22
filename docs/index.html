@@ -6,9 +6,9 @@
   <meta name="description" content="Kantonesiske og sichuanske smaker på Garden Restaurant i Kongsberg. Bestill takeaway eller reserver bord.">
   <meta name="theme-color" content="#201310">
   <title>Garden Restaurant · Kongsberg</title>
-  <link rel="stylesheet" href="styles.css?v=kitchen-first">
+  <link rel="stylesheet" href="styles.css?v=takeaway-guide">
   <script src="weorder-config.js" defer></script>
-  <script src="app.js?v=kitchen-first" defer></script>
+  <script src="app.js?v=takeaway-guide" defer></script>
 </head>
 <body>
   <a class="skip" href="#bestill">Hopp til bestilling</a>
@@ -55,10 +55,10 @@
     <section id="bestill" aria-label="Bestill takeaway">
       <div class="order-shell" id="order-shell">
         <div class="order-toolbar">
-          <span class="weorder-label">WeOrder</span>
+          <p class="order-hint" id="order-hint">Velg Takeaway i WeOrder først.</p>
           <div class="order-actions">
-            <button type="button" class="text-button" id="order-view-control"
-                    aria-controls="weorder" hidden>Vis hele menyen</button>
+            <button type="button" class="text-button order-view-button" id="order-view-control"
+                    aria-controls="weorder" aria-describedby="order-hint" hidden>Vis hele menyen</button>
             <button type="button" class="text-button" id="sound-control" aria-pressed="false" hidden>Lyd av</button>
             <a id="order-direct" class="direct" href="https://order.weorder.com/app/garden">Åpne WeOrder</a>
           </div>
