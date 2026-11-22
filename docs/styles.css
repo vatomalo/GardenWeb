@@ -351,10 +351,8 @@ h1 em {
 
 .order-shell iframe {
   width: 100%;
-  height: var(--weorder-full-height);
-  /* WeOrder's cover uses 30% of its frame height. Keep its last 300px,
-     including the restaurant card, when the frame fits the entire menu. */
-  margin-top: calc(300px - var(--weorder-full-height) * .3);
+  height: clamp(500px, 76vh, 900px);
+  height: min(clamp(500px, 76svh, 900px), calc(100svh - 96px));
   display: block;
   border: 0;
   background: #fff;
@@ -373,9 +371,11 @@ h1 em {
   }
 }
 
-.order-shell.is-compact iframe {
-  height: clamp(500px, 76vh, 900px);
-  margin-top: 0;
+.order-shell.is-full-menu iframe {
+  height: var(--weorder-full-height);
+  /* WeOrder's cover uses 30% of its frame height. Keep its last 300px,
+     including the restaurant card, when the frame fits the entire menu. */
+  margin-top: calc(300px - var(--weorder-full-height) * .3);
 }
 
 .kitchen {

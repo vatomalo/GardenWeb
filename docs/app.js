@@ -43,16 +43,21 @@ try {
   // Keep the verified source-site address when configuration is invalid.
 }
 
+function setFullMenu(showFullMenu) {
+  orderShell.classList.toggle('is-full-menu', showFullMenu);
+  orderViewControl.textContent = showFullMenu ? 'Tilbake til bestilling' : 'Vis hele menyen';
+}
+
 orderViewControl.hidden = false;
 orderViewControl.addEventListener('click', () => {
-  const compact = orderShell.classList.toggle('is-compact');
-  orderViewControl.textContent = compact ? 'Vis hele menyen' : 'Kompakt bestilling';
-  if (compact) {
-    orderShell.scrollIntoView({
-      block: 'start',
-      behavior: reducedMotion.matches ? 'instant' : 'smooth'
-    });
-  }
+  setFullMenu(!orderShell.classList.contains('is-full-menu'));
+  orderShell.scrollIntoView({
+    block: 'start',
+    behavior: reducedMotion.matches ? 'instant' : 'smooth'
+  });
+});
+document.querySelectorAll('a[href="#bestill"]').forEach(link => {
+  link.addEventListener('click', () => setFullMenu(false));
 });
 
 function playChime() {
