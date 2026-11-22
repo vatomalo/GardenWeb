@@ -6,9 +6,9 @@
   <meta name="description" content="Kantonesiske og sichuanske smaker på Garden Restaurant i Kongsberg. Bestill takeaway eller reserver bord.">
   <meta name="theme-color" content="#201310">
   <title>Garden Restaurant · Kongsberg</title>
-  <link rel="stylesheet" href="styles.css?v=takeaway-guide">
+  <link rel="stylesheet" href="styles.css?v=full-menu-map-20261122">
   <script src="weorder-config.js?v=restaurant-only" defer></script>
-  <script src="app.js?v=restaurant-only" defer></script>
+  <script src="app.js?v=full-menu-map-20261122" defer></script>
 </head>
 <body>
   <a class="skip" href="#bestill">Hopp til bestilling</a>
@@ -54,37 +54,53 @@
     <section id="bestill" aria-label="Bestill takeaway">
       <div class="order-shell" id="order-shell">
         <div class="order-toolbar">
-          <p class="order-hint" id="order-hint">Login eller velg takeaway først</p>
+          <p class="order-hint" id="order-hint">Velg takeaway eller logg inn for å bestille fra hele menyen.</p>
           <div class="order-actions">
-            <button type="button" class="text-button order-view-button" id="order-view-control"
-                    aria-controls="weorder" aria-describedby="order-hint" hidden>Vis hele menyen</button>
             <a id="order-direct" class="direct" href="https://order.weorder.com/app/garden">Åpne WeOrder</a>
           </div>
         </div>
         <div class="order-viewport">
           <iframe id="weorder" title="Live bestilling fra Garden Restaurant via WeOrder"
-                  src="https://order.weorder.com/app/garden" loading="lazy"
+                  src="https://order.weorder.com/app/garden" loading="eager" scrolling="no"
                   referrerpolicy="strict-origin-when-cross-origin" allow="payment"></iframe>
         </div>
       </div>
     </section>
 
     <section class="visit" id="besok" aria-labelledby="visit-title">
-      <div class="container visit-grid">
-        <div>
+      <div class="container visit-layout">
+        <div class="visit-main">
           <p class="eyebrow"><span></span> Besøk oss</p>
-          <h2 id="visit-title">Vi ses på Garden.</h2>
-          <address>Storgata 2, 3611 Kongsberg<br><a href="tel:+4732732155">+47 32 73 21 55</a></address>
-          <a class="button gold" href="tel:+4732732155">Ring for bordreservasjon</a>
+          <h2 id="visit-title">Finn veien<br>til Garden.</h2>
+          <p class="visit-lead">En liten tur innom. En kveld å huske. Du finner oss midt i Kongsberg.</p>
+          <address class="visit-address">
+            <span class="visit-label">Adresse</span>
+            <strong>Storgata 2</strong>
+            <span>3611 Kongsberg</span>
+          </address>
+          <div class="visit-actions">
+            <a class="button map-button"
+               href="https://maps.google.com/maps?q=Storgata%202%2C%203611%20Kongsberg"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Åpne kart til Garden Restaurant i Google Maps (ny fane)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="2.5"></circle>
+              </svg>
+              Åpne kart <span class="map-button-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="button outline visit-call" href="tel:+4732732155">Ring for bordreservasjon</a>
+          </div>
         </div>
-        <div class="hours">
-          <h3>Åpningstider</h3>
+        <aside class="hours" aria-labelledby="hours-title">
+          <div class="hours-top"><span class="hours-ornament" aria-hidden="true">✦</span><h3 id="hours-title">Åpningstider</h3></div>
           <dl>
             <div><dt>Mandag–torsdag</dt><dd>14.00–22.00</dd></div>
             <div><dt>Fredag–lørdag</dt><dd>14.00–23.00</dd></div>
             <div><dt>Søndag</dt><dd>14.00–22.00</dd></div>
           </dl>
-        </div>
+          <div class="hours-contact"><span>Ring oss</span><a href="tel:+4732732155">+47 32 73 21 55</a></div>
+        </aside>
       </div>
     </section>
   </main>

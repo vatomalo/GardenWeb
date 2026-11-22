@@ -22,10 +22,6 @@ if (video && filmControl) {
 
 const frame = document.querySelector('#weorder');
 const direct = document.querySelector('#order-direct');
-const orderShell = document.querySelector('#order-shell');
-const orderViewControl = document.querySelector('#order-view-control');
-const orderHint = document.querySelector('#order-hint');
-const takeawayHint = orderHint.textContent;
 
 try {
   const storefront = new URL(config.storefrontUrl);
@@ -37,21 +33,3 @@ try {
 } catch {
   // Keep the verified source-site address when configuration is invalid.
 }
-
-function setFullMenu(showFullMenu) {
-  orderShell.classList.toggle('is-full-menu', showFullMenu);
-  orderViewControl.textContent = showFullMenu ? 'Tilbake til bestilling' : 'Vis hele menyen';
-  orderHint.textContent = showFullMenu ? 'Gå tilbake til bestilling for å bruke kassen.' : takeawayHint;
-}
-
-orderViewControl.hidden = false;
-orderViewControl.addEventListener('click', () => {
-  setFullMenu(!orderShell.classList.contains('is-full-menu'));
-  orderShell.scrollIntoView({
-    block: 'start',
-    behavior: reducedMotion.matches ? 'instant' : 'smooth'
-  });
-});
-document.querySelectorAll('a[href="#bestill"]').forEach(link => {
-  link.addEventListener('click', () => setFullMenu(false));
-});

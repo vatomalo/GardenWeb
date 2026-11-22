@@ -14,7 +14,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Avoid animated scroll resets while interacting with the full WeOrder iframe. */
+  scroll-behavior: auto;
 }
 
 body {
@@ -258,6 +259,7 @@ h1 em {
 
 .order-shell {
   --weorder-full-height: 17800px;
+  overflow-anchor: none;
   border-block: 1px solid #f4dcaa53;
   background: #fff9ec;
   color: #321b18;
@@ -273,9 +275,7 @@ h1 em {
   padding: .75rem clamp(.65rem,2.3vw,1.5rem);
   border-bottom: 1px solid #d9cdbb;
   background: #fff4df;
-  position: sticky;
-  top: 0;
-  z-index: 2;
+  /* In normal flow so the toolbar does not cover the full menu. */
 }
 
 .order-hint {
@@ -290,41 +290,31 @@ h1 em {
   align-items: center;
 }
 
-.text-button,.direct {
+.direct {
   color: #672b25;
   font-size: .9rem;
   font-weight: 650;
 }
 
-.text-button {
-  border: 1px solid #ab776b;
-  background: none;
-  cursor: pointer;
-  padding: .25rem .62rem;
-}
-
-.order-view-button {
-  background: #672b25;
-  border-color: #672b25;
-  color: #fff4df;
-}
-
-.text-button:focus-visible,.direct:focus-visible {
+.direct:focus-visible {
   outline-color: #6e332a;
 }
 
 .order-viewport {
-  overflow: hidden;
+  overflow: clip;
+  overflow-anchor: none;
 }
 
 .order-shell iframe {
   width: 100%;
-  height: clamp(500px, 76vh, 900px);
-  height: min(clamp(500px, 76svh, 900px), calc(100svh - 112px));
+  height: var(--weorder-full-height);
+  /* The WeOrder cover scales with iframe height. Keep the restaurant card in view. */
+  margin-top: calc(300px - var(--weorder-full-height) * .3);
   display: block;
   border: 0;
   background: #fff;
   color-scheme: light;
+  overflow-anchor: none;
 }
 
 @media (min-width: 820px) {
@@ -339,19 +329,12 @@ h1 em {
   }
 }
 
-.order-shell.is-full-menu iframe {
-  height: var(--weorder-full-height);
-  /* WeOrder's cover uses 30% of its frame height. Keep its last 300px,
-     including the restaurant card, when the frame fits the entire menu. */
-  margin-top: calc(300px - var(--weorder-full-height) * .3);
-}
-
 .kitchen {
   padding: clamp(3rem,8vw,7rem) 0;
   background: #241513;
 }
 
-.kitchen-grid,.visit-grid {
+.kitchen-grid {
   display: grid;
   grid-template-columns: 1.14fr 1fr;
   gap: clamp(2rem,6vw,6rem);
@@ -376,37 +359,151 @@ h1 em {
 }
 
 .visit {
-  padding: clamp(3rem,7vw,6rem) 0;
-  border-top: 1px solid var(--line);
-  background: #2d1a17;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(4.5rem, 9vw, 8rem) 0;
+  border-top: 1px solid #f3c77b4d;
+  background:
+    radial-gradient(ellipse at 14% 0%, #633c2a88, transparent 52%),
+    linear-gradient(140deg, #39221b 0%, #201310 75%);
 }
 
-.visit address {
-  font-style: normal;
+.visit::before {
+  content: "";
+  position: absolute;
+  width: min(65vw, 42rem);
+  aspect-ratio: 1;
+  border: 1px solid #f3c77b20;
+  border-radius: 50%;
+  left: -18rem;
+  bottom: -30rem;
+  pointer-events: none;
+}
+
+.visit-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(19rem, .85fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: center;
+  position: relative;
+}
+
+.visit h2 {
+  margin: 1rem 0 1.4rem;
+  max-width: 11ch;
+  font-size: clamp(3.2rem, 6.6vw, 6.3rem);
+}
+
+.visit-lead {
   color: var(--muted);
-  margin-bottom: 1.45rem;
+  max-width: 31rem;
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  margin-bottom: 2.4rem;
+}
+
+.visit-address {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  padding-left: 1.2rem;
+  border-left: 2px solid var(--gold);
+  font-style: normal;
+  line-height: 1.35;
+}
+
+.visit-label {
+  color: var(--gold);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .19em;
+  font-weight: 700;
+  margin-bottom: .6rem;
+}
+
+.visit-address strong {
+  font: normal 1.9rem/1.2 var(--serif);
+  color: var(--cream);
+}
+
+.visit-address > span:last-child {
+  color: var(--muted);
+  margin-top: .3rem;
+}
+
+.visit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  align-items: stretch;
+}
+
+.visit-actions .button {
+  gap: .65rem;
+  min-height: 52px;
+}
+
+.map-button {
+  color: #321b18;
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 9px 25px #10080648;
+  transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+.map-button:hover {
+  background: #ffe0a5;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px #10080665;
+}
+
+.map-button-arrow {
+  margin-left: .35rem;
+  font-size: 1.15rem;
+}
+
+.visit-call {
+  border-color: #ca9b72;
+  color: var(--cream);
 }
 
 .hours {
-  padding: clamp(1rem,3.8vw,2.9rem);
-  border: 1px solid var(--line);
-  background: #221411;
+  padding: clamp(1.5rem, 4vw, 3.4rem);
+  border: 1px solid #f3c77b55;
+  border-radius: 10px;
+  background: linear-gradient(155deg, #302018, #1c120f);
+  box-shadow: 0 25px 55px #0e080950, inset 0 1px #ffe4bd12;
+}
+
+.hours-top {
+  display: flex;
+  gap: .85rem;
+  align-items: center;
+}
+
+.hours-ornament {
+  color: var(--gold);
+  font-size: 1.3rem;
 }
 
 .hours h3 {
-  font-size: 1.7rem;
+  font-size: clamp(1.8rem, 2.4vw, 2.3rem);
 }
 
 .hours dl {
-  margin: 1rem 0 0;
+  margin: 1.75rem 0 0;
 }
 
 .hours dl div {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  border-top: 1px solid var(--line);
-  padding: .6rem 0;
+  border-top: 1px solid #f9edcf2e;
+  padding: 1.05rem 0;
+}
+
+.hours dt {
+  color: var(--cream);
 }
 
 .hours dd {
@@ -414,11 +511,45 @@ h1 em {
   white-space: nowrap;
   color: var(--gold);
   font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.hours-contact {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .75rem;
+  padding-top: 1.3rem;
+  margin-top: .6rem;
+  border-top: 1px solid #f9edcf2e;
+  font-size: .9rem;
+}
+
+.hours-contact span {
+  color: var(--muted);
+}
+
+.hours-contact a {
+  color: var(--gold);
+  font-weight: 650;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .25rem;
+}
+
+@media (max-width: 860px) {
+  .visit-layout {
+    grid-template-columns: 1fr;
+  }
+  .visit h2 {
+    max-width: none;
+  }
 }
 
 .footer {
-  padding: 1.25rem clamp(1.2rem,5vw,4.5rem);
+  padding: 1.55rem clamp(1.2rem,5vw,4.5rem);
   color: var(--muted);
+  border-top: 1px solid #f9edcf22;
+  background: #160e0d;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -447,7 +578,7 @@ h1 em {
   .hero-location {
     display: none;
   }
-  .kitchen-grid,.visit-grid {
+  .kitchen-grid {
     grid-template-columns: 1fr;
   }
 }
